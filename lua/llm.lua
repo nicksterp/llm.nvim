@@ -72,6 +72,7 @@ function M.make_anthropic_spec_curl_args(opts, prompt, system_prompt)
 		table.insert(args, "anthropic-version: 2023-06-01")
 	end
 	table.insert(args, url)
+	print("curl args: " .. vim.inspect(args))
 	return args
 end
 
