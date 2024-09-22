@@ -131,6 +131,8 @@ local function get_prompt(opts)
 end
 
 function M.handle_anthropic_spec_data(data_stream, event_state)
+	print("Recieved data: " .. vim.inspect(data_stream))
+	print("event state: " .. (event_state or "nil"))
 	if event_state == "content_block_delta" then
 		local json = vim.json.decode(data_stream)
 		if json.delta and json.delta.text then
