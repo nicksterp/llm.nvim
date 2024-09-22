@@ -57,6 +57,7 @@ function M.make_anthropic_spec_curl_args(opts, prompt, system_prompt)
 	local url = opts.url
 	local api_key = opts.api_key_name and get_api_key(opts.api_key_name)
 	local data = {
+		url = "https://api.anthropic.com/v1/messages",
 		system = system_prompt,
 		messages = { { role = "user", content = prompt } },
 		model = opts.model,
