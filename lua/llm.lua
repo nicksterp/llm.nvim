@@ -232,3 +232,5 @@ function M.invoke_llm_and_stream_into_editor(opts, make_curl_args_fn, handle_dat
 	vim.api.nvim_set_keymap("n", "<Esc>", ":doautocmd User DING_LLM_Escape<CR>", { noremap = true, silent = true })
 	return active_job
 end
+
+return M
