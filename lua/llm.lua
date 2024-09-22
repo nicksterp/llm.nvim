@@ -2,6 +2,7 @@ local M = {}
 local Job = require("plenary.job")
 
 local function get_api_key(name)
+	print(os.getenv(name))
 	return os.getenv(name)
 end
 
