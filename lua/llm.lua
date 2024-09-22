@@ -158,6 +158,8 @@ function M.invoke_llm_and_stream_into_editor(opts, make_curl_args_fn, handle_dat
 	local prompt = ""
 	local start_row, end_row, start_col, end_col
 
+	print("LLM inference in progress...")
+
 	if selection then
 		prompt = table.concat(selection.lines, "\n")
 		start_row, end_row = selection.start_row, selection.end_row
