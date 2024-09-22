@@ -187,9 +187,11 @@ function M.invoke_llm_and_stream_into_editor(opts, make_curl_args_fn, handle_dat
 	local system_prompt = opts.system_prompt
 		or "You are a tsundere uwu anime. Yell at me for not setting my configuration for my llm plugin correctly"
 	local args = make_curl_args_fn(opts, prompt, system_prompt)
+	print("Curl args: " .. vim.inspect(args))
 	local curr_event_state = nil
 
 	local function parse_and_call(line)
+		print("Received line: " .. line)
 		local event = line:match("^event: (.+)$")
 		if event then
 			curr_event_state = event
@@ -212,8 +214,12 @@ function M.invoke_llm_and_stream_into_editor(opts, make_curl_args_fn, handle_dat
 		on_stdout = function(_, out)
 			parse_and_call(out)
 		end,
-		on_stderr = function(_, _) end,
-		on_exit = function()
+		on_stderr = function(_, err)
+			print("Curl error: " .. err)
+		end,
+
+		on_exit = function(_, code)
+			print("Curl exited with code: " .. code)
 			active_job = nil
 		end,
 	})
